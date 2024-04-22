@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board?serverTimezone=UTC&characterEncoding=UTF-8
+    username: developer
+    password: P!ssw0rd
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 110MB
+
+secret-key: S3cr3tK3yS3cr3tK3yS3cr3tK3yS3cr3tK3yS3cr3tK3y
+
+file:
+  path: D:/fileUpload/ 
+  url: http://localhost:8080/file/
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+
