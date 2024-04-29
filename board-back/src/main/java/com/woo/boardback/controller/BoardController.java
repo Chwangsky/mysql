@@ -108,7 +108,7 @@ public class BoardController {
     }
 
     /**
-     * 게시물의 조화수를 1씩 증가시키기 위해 추가적으로 구현
+     * 게시물의 조화수를 1씩 증가시키기 위해 추가
      */
     @GetMapping("/{boardNumber}/increase-view-count")
     public ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(

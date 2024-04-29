@@ -43,7 +43,7 @@ public class UserController {
         return response;
     }
 
-    // 0woo Jwt 토큰 갱신용 //
+    // Jwt 토큰 갱신용 //
     // 서비스 로직인데 디버깅용으로 일단 컨트롤러에 넣음 //
     @GetMapping("")
     public ResponseEntity<? super GetSignInUserResponseDto> handleCookie (

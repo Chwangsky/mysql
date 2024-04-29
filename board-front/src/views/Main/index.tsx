@@ -101,7 +101,6 @@ export default function Main() {
       setTotalList(latestList);
     }
 
-
     //          function: getPopularListResponse 처리 함수          //
     const getPopularListResponse = (responseBody: GetPopularListResponseDto | ResponseDto | null) => {
       if (!responseBody) return;
@@ -112,6 +111,7 @@ export default function Main() {
       const { popularWordList } = responseBody as GetPopularListResponseDto;
       setPopularWordList(popularWordList);
     }
+    
 
     //          render: 메인화면 하단 컴포넌트 렌더링          //
     return (

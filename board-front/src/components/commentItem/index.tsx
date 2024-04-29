@@ -20,7 +20,7 @@ export default function CommentItem({ commentListItem }: Props) {
   //            function: 작성일 경과시간 함수            //
   const getElapsedTime = () => {
     // TODO : 작성시간 버그
-    const now = dayjs().subtract(3, 'hour'); // GMT+9 시간 TODO
+    const now = dayjs().subtract(3, 'hour').subtract(38,'minute'); // GMT+9 시간 TODO
     const writeTime = dayjs(writeDatetime);
 
     const gap = now.diff(writeTime, 's');

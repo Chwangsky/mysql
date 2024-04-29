@@ -52,6 +52,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BoardSerivceImpl implements BoardService {
@@ -78,8 +79,8 @@ public class BoardSerivceImpl implements BoardService {
 
             imageEntities = imageRepository.findByBoardNumber(boardNumber);
 
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
             return ResponseDto.databaseError();
         }
 

@@ -1,13 +1,15 @@
+*는 반드시 포함되어야 하는 헤더를 의미
 =============================================
+I. signIn (로그인)
 
-signIn (로그인)
-
-- request
+request
+POST http://localhost:8080/api/v1/auth/sign-up
 {
     *email: String,
     *password: String
 }
-- response
+
+response
 성공
 Http Status - 200 (OK)
 {
@@ -18,7 +20,6 @@ Http Status - 200 (OK)
 }
 
 실패
-
 - 로그인 실패
 Http Status - 401 (Unauthorized)
 {
@@ -34,8 +35,7 @@ Http Status - 500 (Interal Server Error)
 }
 
 =============================================
-
-signUp (회원가입)
+II. signUp (회원가입)
 
 - request
 {
@@ -44,7 +44,8 @@ signUp (회원가입)
     *nickname: String,
     *telNumber: String,
     *address: String,
-    addressDetail: String
+    addressDetail: String,
+    agreedPersonal: True
 }
 
 - response
@@ -58,8 +59,7 @@ Http Status - 200 (OK)
 
 실패
 
-- 필수 정보 미입력 / 이메일 포멧 불일치 / 비밀번호 8자 미만 / 전화번호 포멧 불일치
-
+- 필수 정보 미입력 / 이메일 포멧 불일치 / 비밀번호 8자 미만 / 전화번호 포멧 불일치 
 
 - 중복 이메일
 Http Status - 400 (Bad Request)

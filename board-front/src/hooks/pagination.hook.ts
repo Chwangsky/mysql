@@ -1,5 +1,22 @@
 import { useEffect, useState } from "react"
 
+/**
+ * example
+ * 
+ * totalList에 52개의 아이템이 들어있고, countPerPage가 3인 경우,
+ * totalPage = 18
+ * totalSection = 6
+ * totalPageList = 1 ... 18
+ * 
+ * 만약 현재 페이지가 13페이지인 경우, 
+ * viewPage = 26, 27, 28
+ * 
+ * current Section이 2라고 가정하면,
+ * viewPageList = 10, 11, ... 19
+ * 
+ * 
+ */
+
 const usePagination = <T>(countPerPage: number) => {
 
     //          state: 전체 객체 리스트 상태          //
@@ -20,6 +37,31 @@ const usePagination = <T>(countPerPage: number) => {
 
     //          effect: total list가 변경될 때마다 실행할 작업          //
     useEffect( () => {
+
+        updateViewList();
+        updateViewPageList();
+
+        // for debugging 0woo
+        // console.log(`totalPageList: ${totalPageList}`); // 정상적으로 동작. 1, 2 출력
+        //console.log(`totalList: ${totalList.length}`);
+    }, [totalList])
+    
+
+    //          function: 보여줄 객체 리스트 추출 함수          //
+    const updateViewList = () => {
+        const FIRST_INDEX = countPerPage * (currentPage - 1);
+        // const LAST_INDEX = totalList.length > countPerPage * currentPage ? countPerPage * currentPage : totalList.length;
+        const LAST_INDEX = Math.min(totalList.length, countPerPage * currentPage);
+        const viewList = totalList.slice(FIRST_INDEX, LAST_INDEX);
+        setViewList(viewList);
+        // console.log(`viewList: ${viewList.length}`);
+    }   
+
+
+    //          function: 보여줄 페이지 리스트 추출 함수          //
+    const updateViewPageList = () => {
+
+        // 이 부분을 추가해줬더니 정상적으로 동작하는 이유??
         const totalPage = Math.ceil(totalList.length / countPerPage);
         const totalSection = Math.ceil(totalList.length / (countPerPage * 10));
         const totalPageList = [];
@@ -28,36 +70,23 @@ const usePagination = <T>(countPerPage: number) => {
         }
         setTotalPageList(totalPageList);
         setTotalSection(totalSection);
-        setCurrentPage(1);
-        setCurrentSection(1);
 
-        setView();
-        setViewPage();
-    }, [totalList])
-
-    //          function: 보여줄 객체 리스트 추출 함수          //
-    const setView = () => {
-        const FIRST_INDEX = countPerPage * (currentPage - 1);
-        // const LAST_INDEX = totalList.length > countPerPage * currentPage ? countPerPage * currentPage : totalList.length;
-        const LAST_INDEX = Math.min(totalList.length, countPerPage * currentPage);
-        const viewList = totalList.slice(FIRST_INDEX, LAST_INDEX);
-        setViewList(viewList);
-    }   
-
-    //          function: 보여줄 페이지 리스트 추출 함수          //
-    const setViewPage = () => {
+        
         const FIRST_INDEX = 10 * (currentSection - 1);
         // const LAST_INDEX = totalPageList.length > 10 * currentSection ? 10 * currentSection : totalPageList.length;
         const LAST_INDEX = Math.min(10 * currentSection, totalPageList.length);
+        
+
         const viewPageList = totalPageList.slice(FIRST_INDEX, LAST_INDEX);
         setViewPageList(viewPageList);
+        //console.log(`viewPageList: ${viewPageList.length}`);
+
     }
-
-
+ 
     //          effect: currentPage가 변경될 때마다  실행할 작업          //
-    useEffect(setView, [currentPage]);
+    useEffect(updateViewList, [currentPage]);
     //          effect: currentSection이 변경될 때마다 실행할 작업          //
-    useEffect(setViewPage, [currentSection]);
+    useEffect(updateViewPageList, [currentSection]);
     
     return {
         currentPage,

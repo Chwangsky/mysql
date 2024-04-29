@@ -97,7 +97,7 @@ export default function BoardDetail() {
     useEffect(() => {
       if (!boardNumber) {
         navigate(MAIN_PATH())
-         return;
+        return;
       }
       getBoardRequest(boardNumber).then(getBoardResponse);
       
@@ -163,7 +163,7 @@ export default function BoardDetail() {
         <div className='divider'></div>
         <div className='board-detail-top-main'>
           <div className='board-detail-main-text'>{board.content}</div>
-          {board.boardImageList.map(image => <img className='board-detail-main-image' src={image}/>)}
+          {board.boardImageList.map(image => <img key={image} className='board-detail-main-image' src={image}/>)}
           <img className='board-detail-main-image' src='' />
         </div>
       </div>
@@ -180,7 +180,7 @@ export default function BoardDetail() {
 
     //          state: 페이지네이션 관련 상태          //
     const { 
-      currentPage, setCurrentPage, currentSection,setCurrentSection, viewList, viewPageList, totalSection, setTotalList
+      currentPage, setCurrentPage, currentSection, setCurrentSection, viewList, viewPageList, totalSection, setTotalList
     } = usePagination<CommentListItem>(3);
 
 

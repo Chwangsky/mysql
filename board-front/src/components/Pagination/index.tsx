@@ -13,6 +13,22 @@ interface Props {
 }
 
 
+/**
+ * How To Use
+ * 1. 아래와 같이 pagination을 정의한다.
+    const { 
+      currentPage, setCurrentPage, currentSection, setCurrentSection, viewList, viewPageList, totalSection, setTotalList
+    } = usePagination<CommentListItem>(3);
+
+ * 2. 아래와 같은 태그를 넣어주면 끝.
+ * <Pagination 
+              currentPage={currentPage}
+              currentSection={currentSection}
+              setCurrentPage={setCurrentPage}
+              setCurrentSection={setCurrentSection}
+              viewPageList={viewPageList}
+              totalSection={totalSection}/>
+ */
 
 //          component: 페이지네이션 컴포넌트          //
 export default function Pagination(props: Props) {
@@ -22,11 +38,9 @@ export default function Pagination(props: Props) {
   const { setCurrentPage, setCurrentSection } = props;
 
 
-
   //          event handler: 페이지 번호 클릭 이벤트 핸들러          //
   const onPageClickHandler = (page: number) => {
     setCurrentPage(page);
-    // TODO //
   }
 
   //          event handler: 이전 클릭 이벤트 핸들러          //
@@ -34,7 +48,6 @@ export default function Pagination(props: Props) {
     if (currentSection == 1) return;
     setCurrentPage((currentSection - 1) * 10);
     setCurrentSection(currentSection - 1);
-    // TODO //
   }
 
   //          event handler: 다음 클릭 이벤트 핸들러          //
@@ -42,12 +55,7 @@ export default function Pagination(props: Props) {
     if (currentSection === totalSection) return;
     setCurrentPage(currentSection * 10 + 1);
     setCurrentSection(currentSection + 1);
-    // TODO //
   }
-
-
-
-
 
   //          render: 페이지네이션 컴포넌트 렌더링          //
   return (
@@ -61,13 +69,12 @@ export default function Pagination(props: Props) {
       <div className='pagination-divider'>{'\|'}</div>
 
 
-      {viewPageList.map(page => page === currentPage? 
-        <div className='pagination-text-active'>{page}</div>
+      {viewPageList.map(page => (
+        page === currentPage? 
+        <div key={page} className='pagination-text-active'>{page}</div>
         :
-        <div className='pagination-text' onClick={() => onPageClickHandler(page)}>{page}</div>
-      )}
-      
-      
+        <div key={page} className='pagination-text' onClick={() => onPageClickHandler(page)}>{page}</div>
+      ))}
 
       <div className='pagination-divider'>{'\|'}</div>
       <div className='pagination-change-link-box'>

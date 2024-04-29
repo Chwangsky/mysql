@@ -12,7 +12,7 @@ const DOMAIN = 'http://localhost:8080';
 
 const API_DOMAIN = `${DOMAIN}/api/v1`;
 
-const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`;
+const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`; // 왠지 모르겠지만 다들 함수로 쓰더라
 
 export const signInRequest = async (requestBody: SignInRequestDto) => {
     const result = await axios.post(SIGN_IN_URL(), requestBody)
