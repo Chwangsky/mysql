@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
             String profileImage = dto.getProfileImage();
             
             userEntity.setProfileImage(profileImage);
-            System.out.println(userEntity.getProfileImage());
+            // System.out.println(userEntity.getProfileImage());
             userRepository.save(userEntity);
 
         } catch (Exception e) {

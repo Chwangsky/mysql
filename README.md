@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+백엔드 포트폴리오 CRUD + SpringSecurity + 
+
 
 ## Available Scripts
 

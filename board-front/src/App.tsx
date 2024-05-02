@@ -9,13 +9,14 @@ import BoardDetail from 'views/Board/Detail';
 import BoardWrite from 'views/Board/Write';
 import BoardUpdate from 'views/Board/Update';
 import Container from 'layouts/Container';
-import { MAIN_PATH, AUTH_PATH, SEARCH_PATH, USER_PATH, BOARD_PATH, BOARD_WRITE_PATH, BOARD_DETAIL_PATH, BOARD_UPDATE_PATH } from 'constant';
+import { MAIN_PATH, AUTH_PATH, SEARCH_PATH, USER_PATH, BOARD_PATH, BOARD_WRITE_PATH, BOARD_DETAIL_PATH, BOARD_UPDATE_PATH, OAUTH_PATH } from 'constant';
 import { useCookies } from 'react-cookie';
 import { useLoginUserStore } from 'stores';
 import { GetSignInUserResponseDto } from 'apis/response/user';
 import { User } from 'types/interface';
 import { getSignInUserRequest } from 'apis';
 import { ResponseDto } from 'apis/response';
+import OAuth from 'views/Authentication/OAuth';
 
 //          component: Application 컴포넌트     //
 function App() {
@@ -30,7 +31,6 @@ function App() {
   const stateForRunOnlyOnce = useRef(false);
   
   //          effect: accessToken cookie 값이 변경될 때마다 실행될 함수          //
-  // TODO: 위 함수가 2번 실행되는 문제점을 고치는 방법 //
   useEffect(() => {
     if (stateForRunOnlyOnce.current) return;
     if (!cookies.accessToken) {
@@ -66,6 +66,7 @@ function App() {
   return (
     <Routes>
       <Route element={<Container />}>
+        <Route path={OAUTH_PATH(':token', ':expirationTime')} element={<OAuth />} />
         <Route path={MAIN_PATH()} element={<Main />} />
         <Route path={AUTH_PATH()} element={<Authentication />} />
         <Route path={SEARCH_PATH(':searchWord')} element={<Search />} />

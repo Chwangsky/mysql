@@ -2,7 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from '
 import './style.css';
 import InputBox from 'components/InputBox';
 import { SignInRequestDto, SignUpRequestDto } from 'apis/request/auth';
-import { signInRequest, signUpRequest } from 'apis';
+import { GOOGLE_SIGN_IN_URL, googleSignInRequest, KAKAO_SIGN_IN_URL, NAVER_SIGN_IN_URL, naverSignInRequest, signInRequest, signUpRequest } from 'apis';
 import { SignInResponseDto, SignUpResponseDto } from 'apis/response/auth';
 import { ResponseDto } from 'apis/response';
 import { useCookies } from 'react-cookie';
@@ -38,7 +38,7 @@ export default function Authentication() {
     const [email, setEmail] = useState<string>('');
     //          state: 패스워드 상태        //
     const [password, setPassword] = useState<string>('');
-    //          state: 패스워드 타입 상태        //
+    //          state: 패스워드 타입 상태(비밀번호 보기/가리기)        //
     const [passwordType, setPasswordType] = useState<'text' | 'password'>('password');
     //          state: 패스워드 버튼 아이콘 상태        //
     const [passwordButtonIcon, setPasswordButtonIcon] = useState<'eye-light-off-icon' | 'eye-light-on-icon'>('eye-light-on-icon');
@@ -50,6 +50,7 @@ export default function Authentication() {
 
     //          function: sign in response 처리 함수        //
     const signInResponse = (responseBody: SignInResponseDto | ResponseDto | null) => {
+      console.log(responseBody);
       if (!responseBody) {
         alert('네트워크 이상입니다.');
         return;
@@ -117,7 +118,35 @@ export default function Authentication() {
       if (event.key !== 'Enter') return;
       onSignInButtonClickHandler();
     }
+
+    //          event handler: 구글 로그인 버튼 클릭 이벤트 처리        //
+    const onGoogleSignInButtonClickHandler = () => {
+      // TODO // 
+      window.location.href = GOOGLE_SIGN_IN_URL();
+    }
+
+    //          event handler: 네이버 로그인 버튼 클릭 이벤트 처리        //
+    const onNaverSignInButtonClickHandler = () => {
+      // TODO // 
+      window.location.href = NAVER_SIGN_IN_URL();
+
+    }
+
+
+    //          event handler: 카카오 로그인 버튼 클릭 이벤트 처리        //
+    const onKakaoSignInButtonClickHandler = () => {
+      // TODO //
+      window.location.href = KAKAO_SIGN_IN_URL();
+
+    }
+
     
+
+    
+
+
+
+
     //          render: sign in card 컴포넌트 렌더링        //
     return (
       <div className='auth-card'>
@@ -141,10 +170,15 @@ export default function Authentication() {
             } 
             <div className='black-large-full-button' onClick={onSignInButtonClickHandler}>{'로그인'}</div>
             <div className='auth-description-box'>
-              <div className='auth-description'>{'신규 사용자이신가요? '} 
+              <div className='auth-description'>{'신규 사용자이신가요?'} 
                 <span className='auth-description-link' onClick={onSignUpLinkClickhandler}>{'회원가입'}</span>
               </div>
             </div>
+          </div>
+          <div className='oauth-signin-box'>
+            <button type="button" className="kakao-signin-button" onClick={onKakaoSignInButtonClickHandler}/>
+            <button type="button" className="google-signin-button" onClick={onGoogleSignInButtonClickHandler}/>
+            <button type="button" className="naver-signin-button" onClick={onNaverSignInButtonClickHandler}/>
           </div>
         </div>
       </div>

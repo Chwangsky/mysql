@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.woo.boardback.entity.UserEntity;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
@@ -12,5 +13,6 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
     boolean existsByNickname(String nickname);
     boolean existsByTelNumber(String TelNumber);
     UserEntity findByEmail(String email);
+    Optional<UserEntity> findByNickname(String nickname); // null값 처리를 위해 Optional 이용
     
 }

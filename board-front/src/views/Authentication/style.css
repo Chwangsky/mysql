@@ -202,3 +202,60 @@
     font-weight: 600;
     line-height: 140%;
 }
+
+
+.oauth-signin-box {
+    margin-top: 30px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+
+
+.kakao-signin-button {
+    border : none;
+    border-radius: 10px 10px;
+
+    background-color: rgba(0, 0, 0, 0);
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-image: url(assets/image/kakao-icon.png);
+}
+
+.kakao-signin-button:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.google-signin-button {
+
+    border : none;
+    border-radius: 10px 10px;
+
+    background-color: rgba(0, 0, 0, 0);
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-image: url(assets/image/google-icon.png);
+}
+
+.google-signin-button:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.naver-signin-button {
+
+    border : none;
+    border-radius: 10px 10px;
+
+    background-color: rgba(0, 0, 0, 0);
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-image: url(assets/image/naver-icon.png);
+}
+
+.naver-signin-button:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}

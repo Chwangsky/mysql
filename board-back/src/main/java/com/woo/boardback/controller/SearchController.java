@@ -13,7 +13,7 @@ import com.woo.boardback.service.SearchService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value="/api/v1/search")
+@RequestMapping("/api/v1/search")
 @RequiredArgsConstructor
 public class SearchController {
 

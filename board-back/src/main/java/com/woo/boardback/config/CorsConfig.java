@@ -1,6 +1,5 @@
 package com.woo.boardback.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -14,6 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
         corsRegistry
             .addMapping("/**")
             .allowedMethods("*")
-            .allowedOrigins("/");
+            .allowedOrigins("*")
+            .allowedHeaders("*");  // 모든 헤더를 허용
     }
 }

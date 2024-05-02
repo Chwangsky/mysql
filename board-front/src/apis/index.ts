@@ -12,6 +12,45 @@ const DOMAIN = 'http://localhost:8080';
 
 const API_DOMAIN = `${DOMAIN}/api/v1`;
 
+export const GOOGLE_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/google`;
+
+
+export const googleSignInRequest = async () => {
+    try {
+        const response = await fetch(GOOGLE_SIGN_IN_URL(), {mode: "no-cors"});
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        const responseBody = await response.json(); // JSON 데이터 추출
+        return responseBody;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+export const NAVER_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/naver`;
+
+export const naverSignInRequest = async () => {
+    const result = await axios.get(NAVER_SIGN_IN_URL())
+        .then(response => {
+            const responseBody: SignInResponseDto = response.data;
+            return responseBody;
+        })
+        .catch(error => {
+            if (!error.response) return null;
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
+
+
+
+export const KAKAO_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/kakao`;
+
+
+
 const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`; // 왠지 모르겠지만 다들 함수로 쓰더라
 
 export const signInRequest = async (requestBody: SignInRequestDto) => {
