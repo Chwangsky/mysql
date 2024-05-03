@@ -11,7 +11,7 @@ import com.woo.boardback.dto.response.ResponseDto;
 public class PatchProfileImageResponseDto extends ResponseDto {
     
     private PatchProfileImageResponseDto() {
-        super(ResponseMessage.SUCCESS, ResponseMessage.SUCCESS);
+        super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
     }
 
     public static ResponseEntity<PatchProfileImageResponseDto> success() {

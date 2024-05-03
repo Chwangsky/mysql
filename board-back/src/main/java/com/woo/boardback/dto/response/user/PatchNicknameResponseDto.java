@@ -14,7 +14,7 @@ import lombok.Getter;
 public class PatchNicknameResponseDto extends ResponseDto {
 
     private PatchNicknameResponseDto() {
-        super(ResponseMessage.SUCCESS, ResponseMessage.SUCCESS);
+        super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
     }
 
     public static ResponseEntity<PatchNicknameResponseDto> success() {

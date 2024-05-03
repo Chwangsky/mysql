@@ -24,7 +24,7 @@ export default function UserPage() {
   //          state: cookie 상태         //
   const [cookies, setCookies] = useCookies();
   //          state: 로그인 유저 상태          //
-  const { loginUser } = useLoginUserStore();
+  const { loginUser, setLoginUser } = useLoginUserStore();
   //          state: 마이페이지 여부 상태          //
   const [isMyPage, setMyPage] = useState<boolean>(true);
 
@@ -37,12 +37,12 @@ export default function UserPage() {
 
     //          state: 이미지 파일 인풋 참조 상태          //
     const imageInputRef = useRef<HTMLInputElement | null>(null);
-    //          state: 닉네임 변경 여부 상태          //
-    const [isNicknameChange, setnicknameChange] = useState<boolean>(false);
+    //          state: 닉네임 변경 여부 상태 (닉네임 수정 버튼 클릭 시 on, off)          //
+    const [isNicknameChange, setIsNicknameChange] = useState<boolean>(false);
     //          state: 닉네임 상태          //
     const [nickname, setNickname] = useState<string>('');
     //          state: 변경 닉네임 상태          //
-    const [changeNickname, setChangeNickname] = useState<string>('');
+    const [changeNickname, setChangeNickname] = useState<string>(nickname);
     //          state: 프로필 이미지 상태        //
     const [profileImage, setProfileImage] = useState<string | null>(null);
 
@@ -59,7 +59,7 @@ export default function UserPage() {
 
       if (!isNicknameChange) {
         setChangeNickname(nickname);
-        setnicknameChange(!isNicknameChange);
+        setIsNicknameChange(true);
         return;
       }
 
@@ -68,6 +68,7 @@ export default function UserPage() {
         nickname: changeNickname
       };
       patchNicknameRequest(requestBody, cookies.accessToken).then(patchNicknameResponse);
+      setIsNicknameChange(false);
     }
 
     //          function: patchNicknameResponse 처리 함수          //
@@ -82,11 +83,10 @@ export default function UserPage() {
       if (code !== "SU") return;
 
       if (!userEmail) return;
+      console.log("중단점1"); // DOESN't WORK
       getUserRequest(userEmail).then(getUserResponse);
-      setnicknameChange(false);
+      
     }
-
-
 
     //          effect: user email variable 변경시 실행 함수          //
     useEffect(() => {
@@ -105,6 +105,7 @@ export default function UserPage() {
       }
 
       const { email, nickname, profileImage } = responseBody as GetUserResponseDto;
+      // setLoginUser(email, nickname, profileImage);
       setNickname(nickname);
       setProfileImage(profileImage);
       const isMyPage = email === loginUser?.email;
@@ -256,7 +257,7 @@ export default function UserPage() {
       <div id='user-bottom-wrapper'>
         <div className='user-bottom-container'>
           
-          <div className='user-bottom-title'>{ isMyPage ? '내 게시물' : '게시물'}<span className='emphasis'>{count}</span></div>
+          <div className='user-bottom-title'>{ isMyPage ? '내 게시물 ' : '게시물'}<span className='emphasis'>{count}</span></div>
           <div className='user-bottom-contents-box'>
             {
               count == 0 ? 

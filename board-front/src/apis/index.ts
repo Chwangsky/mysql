@@ -337,7 +337,11 @@ export const getRelationListRequest = async (searchWord: string) =>  {
 };
 
 
-const GET_USER_URL = (email:string) => `${API_DOMAIN}/user/${email}`;
+const GET_USER_URL = (email:string) => {
+    const encodedEmail = encodeURIComponent(email);
+    return `${API_DOMAIN}/user/${encodedEmail}`;
+
+}
 
 export const getUserRequest = async (email: string) => {
     const result = await axios.get(GET_USER_URL(email))

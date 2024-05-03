@@ -34,6 +34,7 @@ public class CommentEntity {
         Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String writeDatetime = simpleDateFormat.format(now);
+        System.out.println(writeDatetime);
 
         this.content = dto.getContent();
         this.writeDatetime = writeDatetime;

@@ -121,23 +121,18 @@ export default function Authentication() {
 
     //          event handler: 구글 로그인 버튼 클릭 이벤트 처리        //
     const onGoogleSignInButtonClickHandler = () => {
-      // TODO // 
       window.location.href = GOOGLE_SIGN_IN_URL();
     }
 
     //          event handler: 네이버 로그인 버튼 클릭 이벤트 처리        //
     const onNaverSignInButtonClickHandler = () => {
-      // TODO // 
       window.location.href = NAVER_SIGN_IN_URL();
-
     }
 
 
     //          event handler: 카카오 로그인 버튼 클릭 이벤트 처리        //
     const onKakaoSignInButtonClickHandler = () => {
-      // TODO //
       window.location.href = KAKAO_SIGN_IN_URL();
-
     }
 
     

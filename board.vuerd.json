@@ -19,7 +19,7 @@
     },
     "database": "MySQL",
     "databaseName": "",
-    "canvasType": "@vuerd/builtin-sql-ddl",
+    "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
@@ -412,7 +412,7 @@
         ],
         "ui": {
           "active": false,
-          "left": 831.9722,
+          "left": 836.9722,
           "top": 582.8881,
           "zIndex": 7,
           "widthName": 60,
@@ -477,7 +477,7 @@
           "active": false,
           "left": 1444.357,
           "top": 599.2776,
-          "zIndex": 6,
+          "zIndex": 5,
           "widthName": 60,
           "widthComment": 120,
           "color": "#03A9F4"
@@ -540,7 +540,7 @@
           "active": false,
           "left": 536.4448,
           "top": 370.3481,
-          "zIndex": 3,
+          "zIndex": 2,
           "widthName": 60,
           "widthComment": 84.5703125,
           "color": "#009688"
@@ -669,10 +669,10 @@
           }
         ],
         "ui": {
-          "active": false,
-          "left": 538.8888,
-          "top": 899.8889,
-          "zIndex": 5,
+          "active": true,
+          "left": 520.1388,
+          "top": 932.3889,
+          "zIndex": 8,
           "widthName": 60,
           "widthComment": 71.5703125,
           "color": "#009688"
@@ -781,7 +781,7 @@
           "active": false,
           "left": 1224.2221,
           "top": 893.4997,
-          "zIndex": 4,
+          "zIndex": 3,
           "widthName": 63.775390625,
           "widthComment": 102.140625,
           "color": "#E91E63"
@@ -806,7 +806,7 @@
           "columnIds": [
             "6a1bae5a-7292-4eb9-8425-e5816ce9e39f"
           ],
-          "x": 1333.2842117187502,
+          "x": 1338.2842117187502,
           "y": 699.3881,
           "direction": "right"
         },
@@ -841,7 +841,7 @@
           "columnIds": [
             "f3b99ebc-4d1e-412f-bc79-e7c115504983"
           ],
-          "x": 831.9722,
+          "x": 836.9722,
           "y": 699.3881,
           "direction": "left"
         },
@@ -884,7 +884,7 @@
           "columnIds": [
             "6a1bae5a-7292-4eb9-8425-e5816ce9e39f"
           ],
-          "x": 1082.6282058593752,
+          "x": 1087.6282058593752,
           "y": 582.8881,
           "direction": "top"
         },
@@ -919,8 +919,8 @@
           "columnIds": [
             "d8b1920e-3d1c-4a1c-839f-0590afc21791"
           ],
-          "x": 538.8888,
-          "y": 985.6389,
+          "x": 520.1388,
+          "y": 1018.1389,
           "direction": "left"
         },
         "constraintName": "fk_user_to_comment",
@@ -936,7 +936,7 @@
           "columnIds": [
             "6a1bae5a-7292-4eb9-8425-e5816ce9e39f"
           ],
-          "x": 1082.6282058593752,
+          "x": 1087.6282058593752,
           "y": 815.8881,
           "direction": "bottom"
         },
@@ -945,8 +945,8 @@
           "columnIds": [
             "c98cbdb6-4184-4af8-a9ec-831439c20c59"
           ],
-          "x": 1035.0147765625,
-          "y": 985.6389,
+          "x": 1016.2647765625,
+          "y": 1018.1389,
           "direction": "right"
         },
         "constraintName": "fk_board_to_comment",

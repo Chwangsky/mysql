@@ -1,6 +1,12 @@
 # Getting Started with Create React App
 
-백엔드 포트폴리오 CRUD + SpringSecurity + 
+백엔드 포트폴리오 CRUD + SpringSecurity + OAUTH
+
+기술스택
+
+FE : react(typescript) 
+BE : spring boot (security, oauth ..)
+DB : mysql
 
 
 ## Available Scripts

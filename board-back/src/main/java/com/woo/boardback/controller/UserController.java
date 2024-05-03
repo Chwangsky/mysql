@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriUtils;
 
 import com.woo.boardback.dto.request.user.PatchNicknameRequestDto;
 import com.woo.boardback.dto.request.user.PatchProfileImageRequestDto;
@@ -56,8 +57,10 @@ public class UserController {
 
     @GetMapping("/{email}")
     public ResponseEntity<? super GetUserResponseDto> getUser (
-        @PathVariable("email") String email
+        @PathVariable("email") String encodedEmail
     ) {
+        String email = UriUtils.decode(encodedEmail, "UTF-8");
+        System.out.println(email);
         ResponseEntity<? super GetUserResponseDto> response = userService.getUser(email);
         return response;
     }
