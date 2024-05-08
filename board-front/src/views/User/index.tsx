@@ -19,8 +19,8 @@ import Pagination from 'components/Pagination';
 //          component: 유저 화면 컴포넌트          //
 export default function UserPage() {
 
-  //          state: 유저 이메일 path variable 상태          //
-  const { userEmail } = useParams();
+  //          state: 인코딩된 유저 이메일 path variable 상태          //
+  const { encodedUserEmail } = useParams();
   //          state: cookie 상태         //
   const [cookies, setCookies] = useCookies();
   //          state: 로그인 유저 상태          //
@@ -30,6 +30,8 @@ export default function UserPage() {
 
   //          function: navigate          //
   const navigate = useNavigate();
+
+  const userEmail = encodedUserEmail? decodeURIComponent(encodedUserEmail) : 'default@example.com';
 
 
   //          component: 유저 상단화면 컴포넌트          //
@@ -83,7 +85,6 @@ export default function UserPage() {
       if (code !== "SU") return;
 
       if (!userEmail) return;
-      console.log("중단점1"); // DOESN't WORK
       getUserRequest(userEmail).then(getUserResponse);
       
     }
@@ -120,7 +121,6 @@ export default function UserPage() {
       const data = new FormData();
       data.append('file', file);
 
-      // TODO // 
       fileUploadRequest(data).then(fileUploadResponse)
     }
 
@@ -224,7 +224,12 @@ export default function UserPage() {
     //          event handler: 사이드 카드 클릭 이벤트 처리          //
     const onSideCardClickHandler = () => {
       if (isMyPage) navigate(BOARD_PATH() + '/' + BOARD_WRITE_PATH())
-      else if (loginUser) navigate(USER_PATH(loginUser.email))
+      else if (loginUser) {
+
+
+        const encodedEmail = encodeURIComponent(loginUser.email);
+        navigate(USER_PATH(encodedEmail));
+      }
     
     }
 

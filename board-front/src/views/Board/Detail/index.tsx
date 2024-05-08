@@ -48,7 +48,10 @@ export default function BoardDetail() {
     //          event handler: 닉네임 클릭 이벤트 처리          //
     const onNicknameClickHandler = () => {
       if (!board) return;
-      navigate(USER_PATH(board.writerEmail));
+      
+      // navigate(USER_PATH(board.writerEmail));
+      const encodedEmail = encodeURIComponent(board.writerEmail);
+      navigate(USER_PATH(encodedEmail));
       
     }
 

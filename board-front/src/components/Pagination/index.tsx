@@ -14,20 +14,31 @@ interface Props {
 
 
 /**
- * How To Use
- * 1. 아래와 같이 pagination을 정의한다.
-    const { 
-      currentPage, setCurrentPage, currentSection, setCurrentSection, viewList, viewPageList, totalSection, setTotalList
-    } = usePagination<CommentListItem>(3);
-
- * 2. 아래와 같은 태그를 넣어주면 끝.
- * <Pagination 
-              currentPage={currentPage}
-              currentSection={currentSection}
-              setCurrentPage={setCurrentPage}
-              setCurrentSection={setCurrentSection}
-              viewPageList={viewPageList}
-              totalSection={totalSection}/>
+ * How To Use:
+ * 
+ * 1. Define pagination using the `usePagination` hook:
+ * 
+ *    const { 
+ *      currentPage, 
+ *      setCurrentPage, 
+ *      currentSection, 
+ *      setCurrentSection, 
+ *      viewList, 
+ *      viewPageList, 
+ *      totalSection, 
+ *      setTotalList
+ *    } = usePagination<CommentListItem>(3);
+ * 
+ * 2. Insert the following tag:
+ * 
+ *    <Pagination 
+ *      currentPage={currentPage}
+ *      currentSection={currentSection}
+ *      setCurrentPage={setCurrentPage}
+ *      setCurrentSection={setCurrentSection}
+ *      viewPageList={viewPageList}
+ *      totalSection={totalSection}
+ *    />
  */
 
 //          component: 페이지네이션 컴포넌트          //

@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useRef, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Main from 'views/Main';
 import Authentication from 'views/Authentication';
 import UserPage from 'views/User';
@@ -56,6 +56,7 @@ function App() {
   }
 
   //          render: Application 컴포넌트 렌더링    //
+  // description: 리다이렉트 : '/' 으로 접속 시 home으로 이동
   // description: 메인 화면 : '/' - Main //
   // description: 로그인 + 회원가입 화면 : '/auth' - Authentication //
   // description: 검색 화면 : '/search/:word' - Search //
@@ -67,10 +68,11 @@ function App() {
     <Routes>
       <Route element={<Container />}>
         <Route path={OAUTH_PATH(':token', ':expirationTime')} element={<OAuth />} />
+        <Route path="/" element={<Navigate to={MAIN_PATH()} />} />
         <Route path={MAIN_PATH()} element={<Main />} />
         <Route path={AUTH_PATH()} element={<Authentication />} />
         <Route path={SEARCH_PATH(':searchWord')} element={<Search />} />
-        <Route path={USER_PATH(':userEmail')} element={<UserPage />} />
+        <Route path={USER_PATH(':encodedUserEmail')} element={<UserPage />} />
         <Route path={BOARD_PATH()}>
           <Route path={BOARD_WRITE_PATH()} element={<BoardWrite />} />
           <Route path={BOARD_DETAIL_PATH(':boardNumber')} element={<BoardDetail />} />

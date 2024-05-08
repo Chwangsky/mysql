@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AUTH_PATH, BOARD_DETAIL_PATH, BOARD_PATH, BOARD_UPDATE_PATH, BOARD_WRITE_PATH, MAIN_PATH, SEARCH_PATH, USER_PATH } from 'constant';
 import { useCookies } from 'react-cookie';
 import { useBoardStore, useLoginUserStore } from 'stores';
-import { fileUploadRequest, patchBoardRequest, postBoardRequest } from 'apis';
+import { fileUploadRequest, logoutRequest, patchBoardRequest, postBoardRequest } from 'apis';
 import { PatchBoardRequestDto, PostBoardRequestDto } from 'apis/request/board';
 import { PatchBoardResponseDto, PostBoardResponseDto } from 'apis/response/board';
 import { ResponseDto } from 'apis/response';
@@ -39,6 +39,24 @@ export default function Header() {
   //          state: 유저 페이지 상태 상태          //
   const [isUserPage, setUserPage] = useState<boolean>(false);
 
+  //          effect: path가 변경될 때마다 실행될 함수          //
+  useEffect(() => {
+    const isAuthPage = pathname.startsWith(AUTH_PATH());
+    setAuthPage(isAuthPage);
+    const isMainPage = pathname.startsWith(MAIN_PATH());
+    setMainPage(isMainPage);
+    const isSearchPage = pathname.startsWith('/' + SEARCH_PATH(''));
+    setSearchPage(isSearchPage);
+    const isBoardDetailPage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(''));
+    setBoardDetailPage(isBoardDetailPage);
+    const isBoardWritePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH());
+    setBoardWritePage(isBoardWritePage)
+    const isBoardUpdatePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(''));
+    setBoardUpdatePage(isBoardUpdatePage)
+    const isUserPage = pathname.startsWith(USER_PATH(''));
+    setUserPage(isUserPage);
+  }, [pathname])
+
   //          function: 네비게이트 함수          //
   const navigate = useNavigate();
 
@@ -65,7 +83,6 @@ export default function Header() {
       setWord(value); // setWord  함수를 사용하여 검색어 상태 변경
     };
 
-
     //          event handler: 검색어 키 이벤트 처리 함수          //
     const onSearchWordKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== 'Enter') return;
@@ -91,7 +108,6 @@ export default function Header() {
       }
     }, [searchWord]);
 
-
     if (!status)
       //          render: 클릭 false 상태인 경우 검색 버튼 컴포넌트 렌더링          //
       return (
@@ -114,37 +130,57 @@ export default function Header() {
   //          component: 로그인 또는 마이페이지 버튼 컴포넌트          //
   const MyPageButton = () => {
 
-    //          state: userEmail Path variable 상태           //
-    const { userEmail } = useParams();
+    //          state: encodedUserEmail Path variable 상태           //
+    const { encodedUserEmail } = useParams();
+
+    const userEmail = encodedUserEmail? decodeURIComponent(encodedUserEmail): 'unlogined@email.com';
 
     //          event handler : 마이페이지 버튼 클릭 이벤트 처리 함수          //
     const onMyPageButtonClickHandler = () => {
       if (!loginUser) return;
       const { email } = loginUser;
-      navigate(USER_PATH(email));
+      
+      // navigate(USER_PATH(email));
+      const encodedEmail = encodeURIComponent(email);
+      navigate(USER_PATH(encodedEmail));
     };  
 
     //          event handler : 로그아웃 버튼 클릭 이벤트 처리 함수           //
-    const onSignOutButtonClickHandler = () => {
-      resetLoginUser();
-      setCookie("accessToken", "", { path: MAIN_PATH(), expires: new Date() }); // 
-      navigate(MAIN_PATH())
+    const onSignOutButtonClickHandler = async () => {
+      const response = await logoutRequest();
+      console.log(response);
+
+      if (response && response.code === "SU") {
+          // Reset the user state
+          resetLoginUser();
+
+          // Clear the access token cookie
+          setCookie("accessToken", "", { path: MAIN_PATH(), expires: new Date() });
+
+          // Navigate to the main page
+          navigate(MAIN_PATH());
+          alert("로그아웃되었습니다.")
+      } else {
+          alert("로그아웃이 실패했습니다.");
+          // Handle the error, possibly with a user notification
+      }
     };
 
     //          event handler : 로그인 버튼 클릭 이벤트 처리 함수          //
     const onSignInButtonClickHandler = () => {
       navigate(AUTH_PATH())
     };
-
-    //          render: 로그아웃 버튼 컴포넌트          // 
-    if (isLogin && userEmail === loginUser?.email)
     
+
+    if (isLogin && userEmail === loginUser?.email) {
+
       return (
       <>
       <div className='white-button' onClick={onMyPageButtonClickHandler}>{'마이페이지'}</div>
       <div className='white-button' onClick={onSignOutButtonClickHandler}>{'로그아웃'}</div>
       </>
       );
+    }
 
     //          render: 마이페이지 버튼 컴포넌트 렌더링          //
     if (isLogin) {
@@ -154,6 +190,7 @@ export default function Header() {
     //          render: 로그인 버튼 컴포넌트          //
     return <div className='black-button' onClick={onSignInButtonClickHandler}>{'로그인'}</div>;
   }
+
   //          component: 업로드 버튼 컴포넌트          //
   const UploadButton = () => {
 
@@ -205,7 +242,9 @@ export default function Header() {
       resetBoard();
       if (!loginUser) return;
       const { email } = loginUser;
-      navigate(USER_PATH(email));
+      // navigate(USER_PATH(email));
+      const encodedEmail = encodeURIComponent(email);
+      navigate(USER_PATH(encodedEmail));
     }
 
     //          function: patch board response 처리 함수          //
@@ -231,23 +270,7 @@ export default function Header() {
     return <div className='disable-button'>{'업로드'}</div>;
   }
 
-  //          effect: path가 변경될 때마다 실행될 함수          //
-  useEffect(() => {
-    const isAuthPage = pathname.startsWith(AUTH_PATH());
-    setAuthPage(isAuthPage);
-    const isMainPage = pathname.startsWith(MAIN_PATH());
-    setMainPage(isMainPage);
-    const isSearchPage = pathname.startsWith('/' + SEARCH_PATH(''));
-    setSearchPage(isSearchPage);
-    const isBoardDetailPage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_DETAIL_PATH(''));
-    setBoardDetailPage(isBoardDetailPage);
-    const isBoardWritePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_WRITE_PATH());
-    setBoardWritePage(isBoardWritePage)
-    const isBoardUpdatePage = pathname.startsWith(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(''));
-    setBoardUpdatePage(isBoardUpdatePage)
-    const isUserPage = pathname.startsWith('/' + USER_PATH(''));
-    setUserPage(isUserPage);
-  }, [pathname])
+  
 
   //          effect: login User가 변경된 경우에 실행될 함수         //
   useEffect(() => {

@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriUtils;
 
+import com.nimbusds.jose.util.StandardCharset;
+import com.nimbusds.oauth2.sdk.util.URLUtils;
 import com.woo.boardback.dto.request.board.PatchBoardRequestDto;
 import com.woo.boardback.dto.request.board.PostBoardRequestDto;
 import com.woo.boardback.dto.request.board.PostCommentRequestDto;
@@ -33,6 +36,9 @@ import com.woo.boardback.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 @RestController
 @RequestMapping("/api/v1/board")
@@ -108,7 +114,7 @@ public class BoardController {
     }
 
     /**
-     * 게시물의 조화수를 1씩 증가시키기 위해 추가
+     * 게시물의 조회수를 1씩 증가시키기 위해 추가
      */
     @GetMapping("/{boardNumber}/increase-view-count")
     public ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(
@@ -141,8 +147,9 @@ public class BoardController {
 
     @GetMapping("/user-board-list/{email}")
     public ResponseEntity<? super GetUserBoardResponseDto> getUserBoardList(
-        @PathVariable("email") String email
+        @PathVariable("email") String encodedEmail
     ) {
+        String email = UriUtils.decode(encodedEmail, "UTF-8");
         ResponseEntity<? super GetUserBoardResponseDto> response = boardService.getUserBoardList(email);
         return response;
     }

@@ -14,41 +14,25 @@ const API_DOMAIN = `${DOMAIN}/api/v1`;
 
 export const GOOGLE_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/google`;
 
-
-export const googleSignInRequest = async () => {
-    try {
-        const response = await fetch(GOOGLE_SIGN_IN_URL(), {mode: "no-cors"});
-        if (!response.ok) {
-            throw new Error('Failed to fetch data');
-        }
-        const responseBody = await response.json(); // JSON 데이터 추출
-        return responseBody;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
 export const NAVER_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/naver`;
 
-export const naverSignInRequest = async () => {
-    const result = await axios.get(NAVER_SIGN_IN_URL())
+export const KAKAO_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/kakao`;
+
+const LOGOUT_URL = () => `${API_DOMAIN}/auth/logout`;
+
+export const logoutRequest = async () => {
+    const result = await axios.post(LOGOUT_URL())
         .then(response => {
-            const responseBody: SignInResponseDto = response.data;
+            const responseBody: ResponseDto = response.data;
             return responseBody;
         })
         .catch(error => {
             if (!error.response) return null;
             const responseBody: ResponseDto = error.response.data;
             return responseBody;
-        })
+        });
     return result;
-}
-
-
-
-export const KAKAO_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/kakao`;
-
+};
 
 
 const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`; // 왠지 모르겠지만 다들 함수로 쓰더라
@@ -150,7 +134,10 @@ export const getSearchBoardListRequest = async (searchWord: string, preSearchWor
     return result;    
 }
 
-const GET_USER_BOARD_LIST_URL = (email: string) => `${API_DOMAIN}/board/user-board-list/${email}`;
+const GET_USER_BOARD_LIST_URL = (email: string) => {
+    const encodedEmail = encodeURIComponent(email);
+    return`${API_DOMAIN}/board/user-board-list/${encodedEmail}`;
+}
 
 export const getUserBoardListRequest = async (email: string) => {
     const result = await axios.get(GET_USER_BOARD_LIST_URL(email))

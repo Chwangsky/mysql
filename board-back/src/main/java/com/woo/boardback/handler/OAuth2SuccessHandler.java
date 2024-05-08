@@ -37,7 +37,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         ) throws IOException, ServletException {
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
-
         String code = ResponseCode.SUCCESS;
         String message = ResponseMessage.SUCCESS;
         String email = oAuth2User.getName();

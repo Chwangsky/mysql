@@ -2,7 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from '
 import './style.css';
 import InputBox from 'components/InputBox';
 import { SignInRequestDto, SignUpRequestDto } from 'apis/request/auth';
-import { GOOGLE_SIGN_IN_URL, googleSignInRequest, KAKAO_SIGN_IN_URL, NAVER_SIGN_IN_URL, naverSignInRequest, signInRequest, signUpRequest } from 'apis';
+import { GOOGLE_SIGN_IN_URL, KAKAO_SIGN_IN_URL, NAVER_SIGN_IN_URL, signInRequest, signUpRequest } from 'apis';
 import { SignInResponseDto, SignUpResponseDto } from 'apis/response/auth';
 import { ResponseDto } from 'apis/response';
 import { useCookies } from 'react-cookie';

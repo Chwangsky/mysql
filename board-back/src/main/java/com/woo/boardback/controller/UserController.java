@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriUtils;
 
+import com.nimbusds.jose.util.StandardCharset;
 import com.woo.boardback.dto.request.user.PatchNicknameRequestDto;
 import com.woo.boardback.dto.request.user.PatchProfileImageRequestDto;
 import com.woo.boardback.dto.response.auth.SignInResponseDto;
@@ -59,8 +60,7 @@ public class UserController {
     public ResponseEntity<? super GetUserResponseDto> getUser (
         @PathVariable("email") String encodedEmail
     ) {
-        String email = UriUtils.decode(encodedEmail, "UTF-8");
-        System.out.println(email);
+        String email = UriUtils.decode(encodedEmail, StandardCharset.UTF_8);
         ResponseEntity<? super GetUserResponseDto> response = userService.getUser(email);
         return response;
     }
