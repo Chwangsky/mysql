@@ -18,6 +18,7 @@ export const NAVER_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/naver`;
 
 export const KAKAO_SIGN_IN_URL = () => `${DOMAIN}/oauth2/authorization/kakao`;
 
+
 const LOGOUT_URL = () => `${API_DOMAIN}/auth/logout`;
 
 export const logoutRequest = async () => {

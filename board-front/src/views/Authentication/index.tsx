@@ -50,7 +50,6 @@ export default function Authentication() {
 
     //          function: sign in response 처리 함수        //
     const signInResponse = (responseBody: SignInResponseDto | ResponseDto | null) => {
-      console.log(responseBody);
       if (!responseBody) {
         alert('네트워크 이상입니다.');
         return;
@@ -62,6 +61,7 @@ export default function Authentication() {
       if (code !== 'SU') return;
 
       const {token, expirationTime} = responseBody as SignInResponseDto
+
       const now = new Date().getTime();
       const expires = new Date(now + expirationTime * 1000);
 

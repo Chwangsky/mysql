@@ -68,7 +68,6 @@ function App() {
     <Routes>
       <Route element={<Container />}>
         <Route path={OAUTH_PATH(':token', ':expirationTime')} element={<OAuth />} />
-        <Route path="/" element={<Navigate to={MAIN_PATH()} />} />
         <Route path={MAIN_PATH()} element={<Main />} />
         <Route path={AUTH_PATH()} element={<Authentication />} />
         <Route path={SEARCH_PATH(':searchWord')} element={<Search />} />

@@ -96,7 +96,7 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
             userRepository.save(userEntity);
         }
         
-        return new CustomOAuth2User(userEmail, userNickname, userProfileImage);
+        return new CustomOAuth2User(userEmail, userNickname, userProfileImage, provider);
     }
 
 

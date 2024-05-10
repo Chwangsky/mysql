@@ -146,24 +146,27 @@ export default function Header() {
     };  
 
     //          event handler : 로그아웃 버튼 클릭 이벤트 처리 함수           //
-    const onSignOutButtonClickHandler = async () => {
-      const response = await logoutRequest();
-      console.log(response);
+    const onSignOutButtonClickHandler = () => {
+      logoutRequest().then(
+        response => {
+          console.log(response);
 
-      if (response && response.code === "SU") {
-          // Reset the user state
-          resetLoginUser();
+          if (response && response.code === "SU") {
+              // Reset the user state
+              resetLoginUser();
 
-          // Clear the access token cookie
-          setCookie("accessToken", "", { path: MAIN_PATH(), expires: new Date() });
+              // Clear the access token cookie
+              setCookie("accessToken", "", { path: MAIN_PATH(), expires: new Date() });
 
-          // Navigate to the main page
-          navigate(MAIN_PATH());
-          alert("로그아웃되었습니다.")
-      } else {
-          alert("로그아웃이 실패했습니다.");
-          // Handle the error, possibly with a user notification
-      }
+              // Navigate to the main page
+              navigate(MAIN_PATH());
+              alert("로그아웃되었습니다.")
+          } else {
+              alert("로그아웃이 실패했습니다.");
+              // Handle the error, possibly with a user notification
+          }
+        }
+      )
     };
 
     //          event handler : 로그인 버튼 클릭 이벤트 처리 함수          //

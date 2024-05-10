@@ -14,12 +14,14 @@ public class CustomOAuth2User implements OAuth2User {
     private String email;
     private String nickname;
     private String profileImage;
+    private String provider;
 
     // Constructor including new fields
-    public CustomOAuth2User(String email, String nickname, String profileImage) {
+    public CustomOAuth2User(String email, String nickname, String profileImage, String provider) {
         this.email = email;
         this.nickname = nickname;
         this.profileImage = profileImage;
+        this.provider = provider;
     }
 
     @Override
