@@ -20,10 +20,11 @@ import java.util.Map;
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Autowired
-    private ObjectMapper objectMapper;  // Jackson 라이브러리를 사용하여 JSON 변환
+    private ObjectMapper objectMapper; // Jackson 라이브러리를 사용하여 JSON 변환
 
     @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+            throws IOException, ServletException {
         // 로그아웃 성공 시 수행할 로직
         if (authentication != null) {
             System.out.println("로그아웃 로직 수행!");

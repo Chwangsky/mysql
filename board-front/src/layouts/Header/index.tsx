@@ -86,6 +86,7 @@ export default function Header() {
     //          event handler: 검색어 키 이벤트 처리 함수          //
     const onSearchWordKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== 'Enter') return;
+      if (word === '') return;
       if (!searchButtonRef.current) return;
       searchButtonRef.current.click();
     };
@@ -96,8 +97,9 @@ export default function Header() {
         setStatus(!status);
         return;
       }
-      navigate(SEARCH_PATH(word));
+      if (word !== '') navigate(SEARCH_PATH(word));
       setStatus(false);
+      
     };
 
     //          effect: 검색어 path variable이 변경될 때마다 실행될 함수           //
@@ -119,7 +121,7 @@ export default function Header() {
     //          render: 클릭 true 상태인 경우 검색 버튼 컴포넌트 렌더링          //
     return (
       <div className='header-search-input-box'>
-        <input className='header-search-input' type='text' placeholder='검색어를 입력해 주세요.' value={word} onChange={onSearchWordChangeHandler} onKeyDown={onSearchWordKeyDownHandler}/>
+        <input className='header-search-input' type='text' placeholder='' value={word} onChange={onSearchWordChangeHandler} onKeyDown={onSearchWordKeyDownHandler}/>
         <div ref={searchButtonRef} className='icon-button' onClick={onSearchButtonClickHandler}>
           <div className='icon search-light-icon'></div>
         </div>

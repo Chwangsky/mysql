@@ -1,0 +1,12 @@
+﻿
+DB id
+- database-1
+Master user name
+- admin
+자격 증명 관리
+- 자체 관리
+리전
+- us-east-1c
+엔드포인트 및 포트
+ - database-1.c14w8m6k60u2.us-east-1.rds.amazonaws.com
+ - 3306

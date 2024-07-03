@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.woo.boardback.common.ResponseCode;
 import com.woo.boardback.common.ResponseMessage;
-import com.woo.boardback.dto.response.ResponseDto;
-import com.woo.boardback.dto.response.auth.SignInResponseDto;
 import com.woo.boardback.entity.CustomOAuth2User;
 import com.woo.boardback.provider.JwtProvider;
 

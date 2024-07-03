@@ -1,1 +1,1 @@
-entity를 repository 안에 넣는게 정석이라서 안에 넣었음
+com.mysql.cj.jdbc.Driver

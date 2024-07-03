@@ -56,7 +56,6 @@ public class WebSecurityConfig {
             )
             .authorizeHttpRequests(configureAuthorization())
 
-            // OAUTH2.0 로그아웃 시 사용
             .logout(logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher("/api/v1/auth/logout")) // 로그아웃 경로 설정
                 .logoutSuccessHandler(logoutSuccessHandler)

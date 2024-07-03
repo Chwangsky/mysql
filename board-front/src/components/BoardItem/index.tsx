@@ -54,7 +54,7 @@ export default function BoardItem({ boardListItem }: Props) {
         </div>
         {boardTitleImage != null && (
         <div className='board-list-item-image-box'>
-            <div className='board-list-item-image' style={{ backgroundImage: `url(${writerProfileImage})`}}></div>
+            <div className='board-list-item-image' style={{ backgroundImage: `url(${boardTitleImage})`}}></div>
         </div>
         )}
         

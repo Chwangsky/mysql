@@ -33,6 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             
             String token = parseBearerToken(request);
             
+            // 토큰이 없으면 다음 필터체인으로
             if (token == null) {
                 filterChain.doFilter(request, response);
                 return;
