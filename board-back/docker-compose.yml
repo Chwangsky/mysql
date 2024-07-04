@@ -5,24 +5,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: spring_boot_app
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      NAVER_CLIENT_SECRET: ${NAVER_CLIENT_SECRET}
+      KAKAO_CLIENT_SECRET: ${KAKAO_CLIENT_SECRET}
+      SECRET_KEY: ${SECRET_KEY}
     ports:
       - "8080:8080"
-    env_file:
-      - .env
-    depends_on:
-      - db
-
-  db:
-    image: mysql:8.0
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - db_data:/var/lib/mysql
-
-volumes:
-  db_data:
+      - ./fileUpload:/fileUpload
+ 

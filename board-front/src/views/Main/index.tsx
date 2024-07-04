@@ -14,22 +14,17 @@ import { usePagination } from 'hooks';
 import { GetPopularListResponseDto } from 'apis/response/search';
 
 
-//          component: 메인화면 컴포넌트          //
 export default function Main() {
 
-  //          component: 메인화면 상단 컴포넌트          //
   const MainTop = () => {
 
-    //          state: 주간 top3 게시물 리스트 상태          //
     const [top3BoardList, setTop3BoardList] = useState<BoardListItem[]>([]);
 
-    //          effect: 첫 마운트 시 실행될 함수          //
     useEffect(() => {
       // setTop3ListBoard(top3BoardListMock);
       getTop3BoardListRequest().then(getTop3BoardListResponse);
     }, []);
 
-    //          function: get top 3 board list response 처리함수          //
     const getTop3BoardListResponse = (responseBody: GetTop3BoardListResponseDto | ResponseDto | null) => {
       if (!responseBody) return;
       const { code } = responseBody;
@@ -45,9 +40,10 @@ export default function Main() {
     return (
       <div id='main-top-wrapper'>
         <div className='main-top-container'>
-          <div className='main-top-title'>{'다양한 이야기를 나눠보세요'}</div>
+          <div className='main-top-title'>{'DEV. 0woo의 프론트/백엔드 테스팅 공간입니다.'}</div>
+          <div className='main-top-title'>{'수익창출 목적은 없으며, 오로지 기능 테스팅만을 위해 사용합니다.'}</div>
           <div className='main-top-contents-box'>
-            <div className='main-top-contents-title'>{'주간 TOP 3 게시글'}</div>
+            <div className='main-top-contents-title'>{'가장 인기 많은 게시글'}</div>
             <div className='main-top-contents'>
               { top3BoardList.length > 0 ? top3BoardList.map(item => <Top3Item top3ListItem={item}/>) : <div>{'최근 등록된 게시물이 없습니다.'}</div>}
             </div>
@@ -82,7 +78,6 @@ export default function Main() {
     const onPopularWordClickHandler = (word: string) => {
       navigate(SEARCH_PATH(word));
     }
-
 
     //          effect: 첫 마운트 시 실행될 함수          //
     useEffect(() => {

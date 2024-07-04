@@ -8,7 +8,6 @@ import { useCookies } from 'react-cookie';
 //          component: 게시물 작성 화면 컴포넌트          //
 export default function BoardWrite() {
 
-
   //          state: 제목 영역 요소 참조 상태          //
   const titleRef = useRef<HTMLTextAreaElement | null>(null);
   //          state: 본문 영역 요소 참조 상태          //

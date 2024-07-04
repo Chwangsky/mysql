@@ -134,14 +134,7 @@ export default function Authentication() {
     const onKakaoSignInButtonClickHandler = () => {
       window.location.href = KAKAO_SIGN_IN_URL();
     }
-
     
-
-    
-
-
-
-
     //          render: sign in card 컴포넌트 렌더링        //
     return (
       <div className='auth-card'>

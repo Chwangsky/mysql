@@ -20,5 +20,8 @@ COPY build/libs/*.jar app.jar
 # 6. 애플리케이션 실행
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
-# 7. 애플리케이션이 사용할 포트 노출
+# 7. /fileUpload를 가리키는 볼륨 추가
+VOLUME /fileUpload
+
+# 8. 애플리케이션이 사용할 포트 노출
 EXPOSE 8080

@@ -6,7 +6,6 @@ export const convertUrlToFile = async (url: string) => {
 
     const meta = { type: `image/${extend}`}; // MIME 타입을 설정하기 위한 객체를 지정
     return new File([data], fileName as string, meta); // blob 기반 파일 객체 생성.
-
 };
 
 export const convertUrlsToFile = async (urls: string[]) => {

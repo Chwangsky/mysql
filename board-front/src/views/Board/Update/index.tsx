@@ -35,7 +35,6 @@ export default function BoardUpdate() {
   //          state: 로그인 유저 상태          //
   const { loginUser } = useLoginUserStore();
 
-
   //          state: 게시물 이미지 미리보기 URL 상태          //
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 

@@ -30,9 +30,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         try {
-            
+
             String token = parseBearerToken(request);
-            
+
             // 토큰이 없으면 다음 필터체인으로
             if (token == null) {
                 filterChain.doFilter(request, response);
@@ -63,10 +63,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String authorization = request.getHeader("Authorization");
 
         boolean hasAuthorization = StringUtils.hasText(authorization);
-        if (!hasAuthorization) return null;
+        if (!hasAuthorization)
+            return null;
 
         boolean isBearer = authorization.startsWith("Bearer ");
-        if (!isBearer) return null;
+        if (!isBearer)
+            return null;
 
         String token = authorization.substring(7);
         return token;
